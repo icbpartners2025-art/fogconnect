@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: backend
+    env: node
+    plan: free
+    buildCommand: npm install --prefix backend
+    startCommand: node backend/server.js
+    envVars:
+      - key: MONGO_URI
+        fromDatabase:
+          name: church-management-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+  - type: web
+    name: frontend
+    env: node
+    plan: free
+    buildCommand: npm install --prefix frontend && npm run build --prefix frontend
+    startCommand: npx serve -s frontend/build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: backend
+          property: url
+databases:
+  - name: church-management-db
+    plan: free
