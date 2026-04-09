@@ -56,6 +56,17 @@ const ChurchListPage = () => {
     createdChurch,
   ]);
 
+  const canEdit =
+    userInfo &&
+    [
+      "Super Admin",
+      "Prophet",
+      "Bishop",
+      "Arch Bishop",
+      "Pastor",
+      "Admin",
+    ].includes(userInfo.role.name);
+
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure")) {
       dispatch(deleteChurch(id));
@@ -73,9 +84,11 @@ const ChurchListPage = () => {
           <h1>Churches</h1>
         </Col>
         <Col className="text-right">
-          <Button className="my-3" onClick={createChurchHandler}>
-            <i className="fas fa-plus"></i> Create Church
-          </Button>
+          {canEdit && (
+            <Button className="my-3" onClick={createChurchHandler}>
+              <i className="fas fa-plus"></i> Create Church
+            </Button>
+          )}
         </Col>
       </Row>
       {loadingDelete && <h2>Loading...</h2>}
@@ -105,18 +118,22 @@ const ChurchListPage = () => {
                 <td>{church.address}</td>
                 <td>{church.city ? church.city.name : ""}</td>
                 <td>
-                  <LinkContainer to={`/admin/church/${church._id}/edit`}>
-                    <Button variant="light" className="btn-sm">
-                      <i className="fas fa-edit"></i>
-                    </Button>
-                  </LinkContainer>
-                  <Button
-                    variant="danger"
-                    className="btn-sm"
-                    onClick={() => deleteHandler(church._id)}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </Button>
+                  {canEdit && (
+                    <>
+                      <LinkContainer to={`/admin/church/${church._id}/edit`}>
+                        <Button variant="light" className="btn-sm">
+                          <i className="fas fa-edit"></i>
+                        </Button>
+                      </LinkContainer>
+                      <Button
+                        variant="danger"
+                        className="btn-sm"
+                        onClick={() => deleteHandler(church._id)}
+                      >
+                        <i className="fas fa-trash"></i>
+                      </Button>
+                    </>
+                  )}
                 </td>
               </tr>
             ))}

@@ -14,6 +14,41 @@ connectDB().then(async () => {
     if (!adminRole) {
       adminRole = await Role.create({ name: "Admin", permissions: ["all"] });
     }
+    let superAdminRole = await Role.findOne({ name: "Super Admin" });
+    if (!superAdminRole) {
+      superAdminRole = await Role.create({
+        name: "Super Admin",
+        permissions: ["all"],
+      });
+    }
+    let prophetRole = await Role.findOne({ name: "Prophet" });
+    if (!prophetRole) {
+      prophetRole = await Role.create({
+        name: "Prophet",
+        permissions: ["add", "edit", "delete"],
+      });
+    }
+    let bishopRole = await Role.findOne({ name: "Bishop" });
+    if (!bishopRole) {
+      bishopRole = await Role.create({
+        name: "Bishop",
+        permissions: ["add", "edit", "delete"],
+      });
+    }
+    let archBishopRole = await Role.findOne({ name: "Arch Bishop" });
+    if (!archBishopRole) {
+      archBishopRole = await Role.create({
+        name: "Arch Bishop",
+        permissions: ["add", "edit", "delete"],
+      });
+    }
+    let pastorRole = await Role.findOne({ name: "Pastor" });
+    if (!pastorRole) {
+      pastorRole = await Role.create({
+        name: "Pastor",
+        permissions: ["add", "edit", "delete"],
+      });
+    }
 
     await User.create({
       name: "FogTech",
@@ -54,8 +89,8 @@ const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
     // This allows both your local dev and your Render frontend
-    origin: [process.env.FRONTEND_URL, "http://localhost:3000"], 
-    methods: ["GET", "POST"]
+    origin: [process.env.FRONTEND_URL, "http://localhost:3000"],
+    methods: ["GET", "POST"],
   },
 });
 
