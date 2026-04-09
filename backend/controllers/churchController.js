@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Church = require("../models/churchModel");
+require("../models/cityModel");
 
 // @desc    Get all churches
 // @route   GET /api/churches

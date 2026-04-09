@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Pledge = require("../models/pledgeModel");
+require("../models/userModel");
 
 // @desc    Get all pledges
 // @route   GET /api/pledges

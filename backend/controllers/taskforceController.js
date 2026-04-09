@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Taskforce = require("../models/taskforceModel");
+require("../models/churchModel");
+require("../models/userModel");
 
 // @desc    Get all taskforces
 // @route   GET /api/taskforces

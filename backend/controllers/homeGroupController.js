@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const HomeGroup = require("../models/homeGroupModel");
+require("../models/zoneModel");
+require("../models/userModel");
 
 // @desc    Get all home groups
 // @route   GET /api/homegroups

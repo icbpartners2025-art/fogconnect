@@ -1,5 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Event = require("../models/eventModel");
+require("../models/churchModel");
+require("../models/userModel");
 
 // @desc    Get all events
 // @route   GET /api/events

@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Zone = require("../models/zoneModel");
+require("../models/churchModel");
 
 // @desc    Get all zones
 // @route   GET /api/zones
