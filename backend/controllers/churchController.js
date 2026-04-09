@@ -67,7 +67,7 @@ const updateChurch = asyncHandler(async (req, res) => {
       church.city = await getOrCreateCity(city);
     }
 
-    // Handle leader and admin if provided
+    // Handle leader and admin if provided (they are strings now)
     if (leader !== undefined) {
       church.leader = leader || null;
     }
