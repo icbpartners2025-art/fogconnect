@@ -14,6 +14,14 @@ const churchSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "City",
     },
+    leader: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    admin: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     // Add other fields as per the design document
   },
   {
