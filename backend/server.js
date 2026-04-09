@@ -62,10 +62,15 @@ connectDB().then(async () => {
 
 const cors = require("cors");
 const app = express();
+
+// CORS configuration - allows requests from frontend with Authorization header
 app.use(
   cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    origin: [process.env.FRONTEND_URL, "http://localhost:3000", "https://frontend-k8yn.onrender.com"],
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Authorization", "Content-Type", "X-Requested-With"],
+    credentials: true,
+    optionsSuccessStatus: 200,
   }),
 );
 
@@ -94,8 +99,9 @@ const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
     // This allows both your local dev and your Render frontend
-    origin: [process.env.FRONTEND_URL, "http://localhost:3000"],
+    origin: [process.env.FRONTEND_URL, "http://localhost:3000", "https://frontend-k8yn.onrender.com"],
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
