@@ -1,5 +1,4 @@
 services:
-<<<<<<< Updated upstream
   - type: web
     name: backend
     env: node
@@ -31,36 +30,3 @@ services:
           type: web
           name: backend
           envVarKey: RENDER_EXTERNAL_URL
-=======
-- type: web
-  name: backend
-  env: node
-  plan: free
-  buildCommand: npm install --prefix backend
-  startCommand: node backend/server.js
-  envVars:
-    - key: MONGO_URI
-      # Paste your full MongoDB connection string here
-      value: mongodb+srv://fog_connect_db_user:MjLEylKWl7vW7u8D@fogconnect.e5jlvjj.mongodb.net/?appName=FogConnect
-    - key: JWT_SECRET
-      generateValue: true
-    - key: FRONTEND_URL
-      fromService:
-        type: web
-        name: frontend
-        property: url
-- type: web
-  name: frontend
-  env: node
-  plan: free
-  buildCommand: npm install --prefix frontend && npm run build --prefix frontend
-  startCommand: npx serve -s frontend/build
-  envVars:
-    - key: REACT_APP_API_URL
-      fromService:
-        type: web
-        name: backend
-databases:
-  - name: church-management-db
-    plan: free
->>>>>>> Stashed changes
