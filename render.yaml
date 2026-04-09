@@ -3,8 +3,9 @@ services:
     name: backend
     env: node
     plan: free
-    buildCommand: npm install --prefix backend
-    startCommand: node backend/server.js
+    rootDir: backend # Add this line
+    buildCommand: npm install
+    startCommand: node server.js # Removed 'backend/' prefix since rootDir is set
     envVars:
       - key: MONGO_URI
         value: mongodb+srv://fog_connect_db_user:MjLEylKWl7vW7u8D@fogconnect.e5jlvjj.mongodb.net/?appName=FogConnect
@@ -15,12 +16,14 @@ services:
           type: web
           name: frontend
           envVarKey: RENDER_EXTERNAL_URL
+  
   - type: web
     name: frontend
     env: node
     plan: free
-    buildCommand: npm install --prefix frontend && npm run build --prefix frontend
-    startCommand: npx serve -s frontend/build
+    rootDir: frontend # Add this line
+    buildCommand: npm install && npm run build
+    startCommand: npx serve -s build # Removed 'frontend/' prefix
     envVars:
       - key: REACT_APP_API_URL
         fromService:
