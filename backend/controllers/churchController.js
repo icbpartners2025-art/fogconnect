@@ -13,20 +13,15 @@ const getChurches = asyncHandler(async (req, res) => {
 // @route   POST /api/churches
 // @access  Private/Admin
 const createChurch = asyncHandler(async (req, res) => {
-  const { name, address, city } = req.body;
-
-  const church = await Church.create({
-    name,
-    address,
-    city,
+  const church = new Church({
+    name: "Sample name",
+    address: "Sample address",
+    city: null,
+    user: req.user._id,
   });
 
-  if (church) {
-    res.status(201).json(church);
-  } else {
-    res.status(400);
-    throw new Error("Invalid church data");
-  }
+  const createdChurch = await church.save();
+  res.status(201).json(createdChurch);
 });
 
 // @desc    Update a church
