@@ -39,8 +39,8 @@ const ChurchEditPage = () => {
           setName(church.name);
           setAddress(church.address);
           setCity(church.city ? church.city._id : "");
-          setLeader(church.leader ? church.leader._id : "");
-          setAdmin(church.admin ? church.admin._id : "");
+          setLeader(church.leader ? church.leader : "");
+          setAdmin(church.admin ? church.admin : "");
         }
       }
     }
